@@ -9,6 +9,10 @@ import com.victor.world.World;
 
 public class Player extends Entity {
 	
+	public boolean right, left, jump;
+	
+	private double gravity = 2;
+	public int dir = 1;
 	private int frames = 0, maxFrames = 8, index = 0, maxIndex = 2;
 	
 	
@@ -22,11 +26,28 @@ public class Player extends Entity {
 		// CAMADA DE RENDER
 		depth = 2;
 		
+		//LOGICA GRAVIDADE
+		if(World.isFree((int) x, (int) (y + gravity))) {
+			y += gravity;
+		}
+		//MOVIMENTACAO
+		if(right && World.isFree((int) (x + speed),(int) y)) {
+			x+=speed;
+			dir = 1;
+		}else if(left && World.isFree((int) (x - speed),(int) y)) {
+			x-=speed;
+			dir = -1;
+		}
+		
 	}
 
 	
 	public void render(Graphics g) {  
-	
-		
+		if(dir == 1) {
+			sprite = Entity.PLAYER_SPRITE_RIGHT;
+		}else if (dir == -1) {
+			sprite = Entity.PLAYER_SPRITE_LEFT;
+		}
+		super.render(g);
 	}
 }

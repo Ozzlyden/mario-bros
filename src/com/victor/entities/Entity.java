@@ -15,12 +15,12 @@ import com.victor.world.World;
 
 public class Entity {
 	
-	public static BufferedImage MOEDA_SPRITE = Game.spritesheet.getSprite(144,32, 16, 16);
-	public static BufferedImage ENEMY1_SPRITE = Game.spritesheet.getSprite(0,48, 16, 16);
-	public static BufferedImage ENEMY2_SPRITE = Game.spritesheet.getSprite(0,64, 16, 16);
-	public static BufferedImage ENEMY3_SPRITE = Game.spritesheet.getSprite(0,80, 16, 16);
-	public static BufferedImage GHOST_MODE_SPRITE = Game.spritesheet.getSprite(0,128, 16, 16);
+	
+	public static BufferedImage PLAYER_SPRITE_RIGHT = Game.spritesheet.getSprite(48, 0, 16, 16);
+	public static BufferedImage PLAYER_SPRITE_LEFT = Game.spritesheet.getSprite(48, 16, 16, 16);
 
+	public static BufferedImage ENEMY1_SPRITE = Game.spritesheet.getSprite(0,48, 16, 16);
+	
 
 	public double x;
 	public double y;

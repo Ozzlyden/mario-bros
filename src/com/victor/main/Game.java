@@ -35,8 +35,8 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 	private Thread thread;
 	private boolean isRunning = true;
 	public static final int WIDTH = 240;
-	public static final int HEIGHT = 160;
-	public static final int SCALE = 2;
+	public static final int HEIGHT = 240;
+	public static final int SCALE = 3;
 	
 	private BufferedImage image;
 	
@@ -69,7 +69,7 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 		entities = new ArrayList<Entity>();
 		
 		//INICIALIZANDO OBJETOS
-		player = new Player(WIDTH / 2 - 70, HEIGHT / 2, 16, 16, 2, spritesheet.getSprite(0, 0, 16, 16));
+		player = new Player(WIDTH / 2 - 70, HEIGHT / 2, 16, 16, 1.4, Entity.PLAYER_SPRITE_RIGHT);
 		world = new World("/level1.png");
 		ui = new UI();
 		
@@ -202,12 +202,20 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 	//TECLADO
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
+		if(e.getKeyCode() == KeyEvent.VK_D ||e.getKeyCode() == KeyEvent.VK_RIGHT ) {
+			player.right = true;
+		}else if (e.getKeyCode() == KeyEvent.VK_A ||e.getKeyCode() == KeyEvent.VK_LEFT) {
+			player.left = true;
+		}
 	}
 	
 	@Override
 	public void keyReleased(KeyEvent e) {
-
+		if(e.getKeyCode() == KeyEvent.VK_D ||e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			player.right = false;
+		}else if (e.getKeyCode() == KeyEvent.VK_A ||e.getKeyCode() == KeyEvent.VK_LEFT) {
+			player.left = false;
+		}
 	}
 
 	@Override
