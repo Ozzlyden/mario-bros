@@ -16,8 +16,8 @@ import com.victor.world.World;
 public class Entity {
 	
 	
-	public static BufferedImage PLAYER_SPRITE_RIGHT = Game.spritesheet.getSprite(48, 0, 16, 16);
-	public static BufferedImage PLAYER_SPRITE_LEFT = Game.spritesheet.getSprite(48, 16, 16, 16);
+	public static BufferedImage[] PLAYER_SPRITE_RIGHT = {Game.spritesheet.getSprite(48, 0, 16, 16), Game.spritesheet.getSprite(64, 0, 16, 16)};
+	public static BufferedImage[] PLAYER_SPRITE_LEFT = {Game.spritesheet.getSprite(48, 16, 16, 16), Game.spritesheet.getSprite(64, 16, 16, 16)};
 
 	public static BufferedImage ENEMY1_SPRITE = Game.spritesheet.getSprite(0,48, 16, 16);
 	

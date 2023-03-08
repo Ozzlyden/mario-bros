@@ -9,11 +9,19 @@ import com.victor.world.World;
 
 public class Player extends Entity {
 	
-	public boolean right, left, jump;
+	public boolean right, left;
+	
+	public boolean isJumping = false;
+	public boolean jump = false;
+	public int jumpHeight = 48, jumpFrames = 0;
+	
+	private int framesAnimation = 0;
+	private int maxFrames = 15;
+	private int maxSprite = 2;
+	private int curSprite = 0;
 	
 	private double gravity = 2;
 	public int dir = 1;
-	private int frames = 0, maxFrames = 8, index = 0, maxIndex = 2;
 	
 	
 	public Player(int x, int y, int width, int height,double speed, BufferedImage sprite) {
@@ -27,7 +35,7 @@ public class Player extends Entity {
 		depth = 2;
 		
 		//LOGICA GRAVIDADE
-		if(World.isFree((int) x, (int) (y + gravity))) {
+		if(World.isFree((int) x, (int) (y + gravity)) && isJumping == false) {
 			y += gravity;
 		}
 		//MOVIMENTACAO
@@ -39,14 +47,47 @@ public class Player extends Entity {
 			dir = -1;
 		}
 		
+		
+		//LOGICA DE PULO
+		if(jump) {
+			if(!World.isFree(this.getX(), this.getY() + 1)) {
+				isJumping = true;			
+			}else {
+				jump = false;
+			}
+		}
+		if (isJumping) {
+			if(World.isFree(this.getX(), this.getY() - 2)) {
+				y-=2;
+				jumpFrames+=2;
+				if(jumpFrames == jumpHeight) {
+					isJumping = false;
+					jump = false;
+					jumpFrames = 0;
+				}
+			}else {
+				isJumping =false;
+				jump = false;
+				jumpFrames = 0;
+			}
+		}
 	}
+		
 
 	
-	public void render(Graphics g) {  
+	public void render(Graphics g) { 
+		framesAnimation++;
+		if(framesAnimation == maxFrames) {
+			curSprite++;
+			framesAnimation = 0;
+			if(curSprite == maxSprite) {
+				curSprite = 0;
+			}
+		}
 		if(dir == 1) {
-			sprite = Entity.PLAYER_SPRITE_RIGHT;
+			sprite = Entity.PLAYER_SPRITE_RIGHT[curSprite];
 		}else if (dir == -1) {
-			sprite = Entity.PLAYER_SPRITE_LEFT;
+			sprite = Entity.PLAYER_SPRITE_LEFT[curSprite];
 		}
 		super.render(g);
 	}
