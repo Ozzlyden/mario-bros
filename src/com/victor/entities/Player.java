@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import com.victor.main.Game;
+import com.victor.world.Camera;
 import com.victor.world.World;
 
 
@@ -71,6 +72,10 @@ public class Player extends Entity {
 				jumpFrames = 0;
 			}
 		}
+		
+		//SISTEMA DE CAMERA
+		Camera.x = Camera.clamp((int)x - Game.WIDTH / 2, 0, World.WIDTH * 16 - Game.WIDTH);
+		Camera.y = Camera.clamp((int)y - Game.HEIGHT / 2, 0, World.HEIGHT * 16 - Game.HEIGHT);
 	}
 		
 

@@ -35,6 +35,12 @@ public class World {
 						tiles[xx + (yy * WIDTH)] = new FloorTile(xx*16,yy*16,Tile.TILE_FLOOR);
 					}else if(pixelAtual == 0xFFFFFFFF) {
 						tiles[xx + (yy * WIDTH)] = new WallTile(xx*16,yy*16,Tile.TILE_WALL);
+						
+						//PAREDE INTELIGANTE
+						if(yy - 1 >= 0 && pixels[xx + (yy - 1) * map.getWidth()] == 0xFFFFFFFF) {
+						tiles[xx + (yy * WIDTH)] = new WallTile(xx*16,yy*16, Game.spritesheet.getSprite(16, 16, 16, 16));
+						}
+						
 					}else if (pixelAtual ==  0xFF0026FF) {
 						//PLAYER
 						Game.player.setX(xx * 16);
