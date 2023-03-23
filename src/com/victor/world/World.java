@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+import com.victor.entities.Enemy1;
+import com.victor.entities.Enemy2;
 import com.victor.entities.Entity;
 import com.victor.entities.Player;
 import com.victor.main.Game;
@@ -31,6 +33,12 @@ public class World {
 					
 					// COMO EH JOGO DE PLATAFORMA, A WALL EH O CHAO
 					
+					/*
+					 * 0xFF0026FF -> Player
+					 * 0xFFFF0000  -> Enemy 1
+					 * 0xFFFF0001 -> Enemy 2
+					 */
+					
 					if(pixelAtual == 0xFF000000) {
 						tiles[xx + (yy * WIDTH)] = new FloorTile(xx*16,yy*16,Tile.TILE_FLOOR);
 					}else if(pixelAtual == 0xFFFFFFFF) {
@@ -45,6 +53,16 @@ public class World {
 						//PLAYER
 						Game.player.setX(xx * 16);
 						Game.player.setY(yy * 16);
+					}
+					else if (pixelAtual ==  0xFFFF0000) {
+						//ENEMY 1
+						Enemy1 enemy1 = new Enemy1(xx*16, yy*16, 16, 16, 1, Entity.ENEMY1);
+						Game.entities.add(enemy1);
+					}
+					else if (pixelAtual ==  0xFFFF0001) {
+						//ENEMY 2
+						Enemy2 enemy2 = new Enemy2(xx*16, yy*16, 16, 16, 1, Entity.ENEMY2);
+						Game.entities.add(enemy2);
 					}
 				}
 			}
