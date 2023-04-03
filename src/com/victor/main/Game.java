@@ -44,14 +44,13 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 	
 	public static World world;
 	public static List<Entity> entities;
+	public static List<Enemy1> enemies1;
+	public static List<Enemy2> enemies2;
+	
 	public static Spritesheet spritesheet;
 	public static Player player;
 	
-	public UI ui;
-	
-	public static List<Enemy1> enemies1;
-	public static List<Enemy2> enemies2;
-			
+	public UI ui;			
 	
 	public Game() {
 		

@@ -49,6 +49,22 @@ public class Player extends Entity {
 		//LOGICA GRAVIDADE
 		if(World.isFree((int) x, (int) (y + gravity)) && isJumping == false) {
 			y += gravity;
+			
+			//LOGICA DE DANO CAINDO
+			for(int i = 0; i < Game.entities.size(); i++) {
+			Entity e = Game.entities.get(i);
+			if(e instanceof Enemy2) {
+				if(Entity.isColliding(this, e)) {
+					isJumping = true;
+					jumpHeight = 32;
+					((Enemy2) e).vida--;
+					if(((Enemy2) e).vida == 0) {
+						Game.entities.remove(i);
+						break;
+					}
+				}
+			}
+			}
 		}
 		//MOVIMENTACAO
 		if(right && World.isFree((int) (x + speed),(int) y)) {
