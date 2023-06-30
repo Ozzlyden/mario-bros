@@ -131,6 +131,18 @@ public class Player extends Entity {
 			}
 		}
 		
+		// COLETAR COIN
+		for(int i = 0; i < Game.entities.size(); i++) {
+			Entity e = Game.entities.get(i);
+			if(e instanceof Coin) {
+				if(Entity.isColliding(this, e)) {
+					Game.entities.remove(i);
+					Player.currentCoins++;
+					break;
+				}
+			}
+		}
+		
 		//SISTEMA DE CAMERA
 		Camera.x = Camera.clamp((int)x - Game.WIDTH / 2, 0, World.WIDTH * 16 - Game.WIDTH);
 		Camera.y = Camera.clamp((int)y - Game.HEIGHT / 2, 0, World.HEIGHT * 16 - Game.HEIGHT);
