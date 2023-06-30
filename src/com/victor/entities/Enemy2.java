@@ -1,6 +1,7 @@
 package com.victor.entities;
 
 import java.awt.Color;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -44,9 +45,9 @@ public class Enemy2 extends Entity{
 		//LOGICA DE MOVIMENTACAO	
 		if(right) {
 			if(World.isFree((int) (x+speed),(int) y)) {
-				
 				x+=speed;
 			if(World.isFree((int) (x+16),(int) y+1)){
+				//System.out.println("Colidindo Direita");
 				right = false;
 				left = true;
 			}
@@ -60,6 +61,7 @@ public class Enemy2 extends Entity{
 			if(World.isFree((int)(x-speed), (int)y)) {
 			x-=speed;
 			if(World.isFree((int) (x-16),(int) y+1)){
+				//System.out.println("Colidindo Esquerda");
 				right = true;
 				left = false;
 			}
@@ -78,6 +80,10 @@ public class Enemy2 extends Entity{
 				if(index > maxIndex)
 					index = 0;
 			}
+	}
+	
+	public boolean test(){
+		return false;
 	}
 	
 	public void render(Graphics g) {

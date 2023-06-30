@@ -12,9 +12,11 @@ public class Player extends Entity {
 	
 	public boolean right, left, moved;
 	
+	public static double life = 100;
+	
 	public boolean isJumping = false;
 	public boolean jump = false;
-	public int jumpHeight = 48, jumpFrames = 0;
+	public int jumpHeight = 56, jumpFrames = 0;
 	
 	private int framesAnimation = 0;
 	private int maxFrames = 15;
@@ -80,6 +82,7 @@ public class Player extends Entity {
 		//LOGICA DE PULO
 		if(jump) {
 			if(!World.isFree(this.getX(), this.getY() + 1)) {
+				//System.out.println("Pulando");
 				isJumping = true;			
 			}else {
 				jump = false;
@@ -111,6 +114,18 @@ public class Player extends Entity {
 				}
 			}
 			
+		}
+		
+		// SISTEMA DE DANO NA COLISAO
+		for(int i = 0; i < Game.entities.size(); i++) {
+		Entity e = Game.entities.get(i);
+		if(e instanceof Enemy2) {
+			if(Entity.isColliding(this, e)) {
+				if(Entity.rand.nextInt(100) < 50) {
+					life--;
+					}
+				}
+			}
 		}
 		
 		//SISTEMA DE CAMERA
