@@ -14,9 +14,12 @@ public class Player extends Entity {
 	
 	public static double life = 100;
 	
+	public static int currentCoins = 0;
+	public static int maxCoins = 0;	
+	
 	public boolean isJumping = false;
 	public boolean jump = false;
-	public int jumpHeight = 56, jumpFrames = 0;
+	public int jumpHeight = 40, jumpFrames = 0;
 	
 	private int framesAnimation = 0;
 	private int maxFrames = 15;
@@ -58,7 +61,7 @@ public class Player extends Entity {
 			if(e instanceof Enemy2) {
 				if(Entity.isColliding(this, e)) {
 					isJumping = true;
-					jumpHeight = 32;
+					jumpHeight = 40;
 					((Enemy2) e).vida--;
 					if(((Enemy2) e).vida == 0) {
 						Game.entities.remove(i);

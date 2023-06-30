@@ -36,6 +36,8 @@ public class Enemy2 extends Entity{
 	}
 
 	public void tick() {
+		// CAMADA DE RENDER
+		depth = 2;
 		
 		//LOGICA GAVIDADE
 		if(World.isFree((int) x, (int) (y + 1))) {

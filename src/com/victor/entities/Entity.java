@@ -20,7 +20,8 @@ public class Entity {
 	
 	public static BufferedImage ENEMY1 = Game.spritesheet.getSprite(0,64, 16, 16);
 	public static BufferedImage ENEMY2 = Game.spritesheet.getSprite(0,80, 16, 16);
-	
+	public static BufferedImage COIN = Game.spritesheet.getSprite(32,48, 16, 16);
+
 
 	public double x;
 	public double y;

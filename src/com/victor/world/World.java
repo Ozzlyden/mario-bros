@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+import com.victor.entities.Coin;
 import com.victor.entities.Enemy1;
 import com.victor.entities.Enemy2;
 import com.victor.entities.Entity;
@@ -37,6 +38,7 @@ public class World {
 					 * 0xFF0026FF -> Player
 					 * 0xFFFF0000  -> Enemy 1
 					 * 0xFFFF0001 -> Enemy 2
+					 * 0xFFFFD800 -> Coin
 					 */
 					
 					if(pixelAtual == 0xFF000000) {
@@ -63,6 +65,12 @@ public class World {
 						//ENEMY 2
 						Enemy2 enemy2 = new Enemy2(xx*16, yy*16, 16, 16, 1, Entity.ENEMY2);
 						Game.entities.add(enemy2);
+					}
+					else if (pixelAtual ==  0xFFFFD800) {
+						//ENEMY 2
+						Coin coin = new Coin(xx*16, yy*16, 16, 16, 1, Entity.COIN);
+						Game.entities.add(coin);
+						Player.maxCoins++;
 					}
 				}
 			}

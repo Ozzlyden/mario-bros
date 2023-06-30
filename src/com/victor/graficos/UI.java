@@ -19,6 +19,10 @@ public class UI {
 		g.fillRect(10, 10,(int)((Player.life / 100) * 200), 30);
 		g.setColor(Color.white);
 		g.drawRect(10,10,200, 30);
+		
+		// INFO COIN
+		g.setFont(new Font("Arial", Font.BOLD, 17));
+		g.drawString("Moedas:" + Player.currentCoins + "/" + Player.maxCoins ,(Game.WIDTH * Game.SCALE) - 490, 30);
 	}
 	
 }
