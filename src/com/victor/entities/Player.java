@@ -19,14 +19,15 @@ public class Player extends Entity {
 	
 	public boolean isJumping = false;
 	public boolean jump = false;
-	public int jumpHeight = 40, jumpFrames = 0;
+	public int jumpHeight = 30, jumpFrames = 0;
 	
 	private int framesAnimation = 0;
 	private int maxFrames = 15;
 	private int maxSprite = 2;
 	private int curSprite = 0;
 	
-	private double gravity = 2;
+	private double gravity = 0.3;
+	private double vspd = 0;		// Altura do pulo gravidade avancada
 	public int dir = 1;
 	
 	private BufferedImage[] PLAYER_RIGHT;
@@ -51,7 +52,52 @@ public class Player extends Entity {
 		depth = 2;
 		moved = false;
 		
-		//LOGICA GRAVIDADE
+		vspd += gravity;
+		
+		
+		//LOGICA GRAVIDADE AVANCADA
+		if(!World.isFree((int)x, (int) (y + 1)) && jump) {
+			vspd = -6;
+			jump = false;
+		}
+		
+		if(!World.isFree((int)x,(int)(y + vspd))) {
+			
+			int signVsp = 0;
+			if(vspd >= 0) {
+				signVsp = 1;
+			}else {
+				signVsp = -1;
+			}
+			while(World.isFree((int)x, (int) (y + signVsp))) {
+				y = y + signVsp;
+			}
+			vspd = 0;
+			
+			//LOGICA DE DANO CAINDO
+			for(int i = 0; i < Game.entities.size(); i++) {
+			Entity e = Game.entities.get(i);
+			if(e instanceof Enemy2) {
+				if(Entity.isColliding(this, e)) {
+					isJumping = true;
+					//jumpHeight = 40;
+					vspd = -3;
+					((Enemy2) e).vida--;
+					if(((Enemy2) e).vida == 0) {
+						Game.entities.remove(i);
+						break;
+					}
+				}
+			}
+			}
+			
+			
+		}
+		
+		y = y + vspd;
+		
+		/*
+		//LOGICA GRAVIDADE SIMPLES
 		if(World.isFree((int) x, (int) (y + gravity)) && isJumping == false) {
 			y += gravity;
 			
@@ -71,6 +117,8 @@ public class Player extends Entity {
 			}
 			}
 		}
+		*/
+		
 		//MOVIMENTACAO
 		if(right && World.isFree((int) (x + speed),(int) y)) {
 			x+=speed;
